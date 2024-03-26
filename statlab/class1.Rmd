@@ -1,0 +1,91 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# STATLAB - primeira aula 
+
+```{r}
+install.packages("BiocManager")
+BiocManager::install("ggplot")
+```
+
+```{r}
+library(ggplot2)
+?ggplot2
+```
+
+
+# Segunda aula - Objetos
+```{r}
+# criando um vetor numérico
+c(1,2,3, 4.5)
+# outra maneira de criar um vetor numérico é:
+1:30.5
+# só que no vetor acima, so é pego numeros inteiros, se eu colocar numeros quebrados
+# ele nao pega
+```
+### Você pode sequenciar e repetir também os números
+```{r}
+# ele sequencia de 2 a 3 somando 0.5 por vez
+seq(2,3, by=0.5)
+
+# na função abaixo voce repete a sua sequencia de 1 a 10 (5 vezes)
+rep(1:10, times=5)
+
+# repete cada numero duas vezes na sequencia
+vetor_repetido <- rep(1:10, each=2)
+```
+### Funções com vetores:
+```{r}
+# ordenando o vetor em ordem crescente
+sort(1:100)
+# ordenando em ordem decrescente
+rev(1:100)
+# voce pode transformar o seu vetor em uma tabela (ele vai ver se tem ocorrencias)
+# repetidas e contar
+table(vetor_repetido)
+# a função unique vai me dar os valores unicos, sem repetição
+unique(vetor_repetido)
+```
+### Indexação dos vetors
+```{r}
+# para acessar o terceito elemento do seu vetor:
+vetor_repetido[3]
+
+# se eu quiser tirar esse terceiro valor do meu vetor:
+vetor_repetido[-3]
+
+# para ver o que tem do primeiro ao quarto elemento
+vetor_repetido[1:4]
+
+# para remover do segundo elemento até o sexto (incluso) do vetor:
+vetor_repetido
+vetor_repetido[-(3:7)]
+
+# se quiser saber existe o valor no vetorr:
+vetor_semrepetir <- seq(1,200, by=0.5)
+vetor_semrepetir[vetor_semrepetir==192.5]
+
+# filtrar o vetor para conter apenas os elementos > 190:
+vetor_semrepetir[vetor_semrepetir>190]
+
+# selecionar elementos especificos:
+vetor_semrepetir[vetor_semrepetir %in% c(2,10,192)]
+# e se nao tiver no vetor?
+vetor_semrepetir[vetor_semrepetir %in% c(10000,103333,400)] 
+# ele seleciona apenas os que tem. (não dá erro)
+```
+
+### Vetores lógicos
+Possuem valores booleanos
+```{r}
+logical <- c(TRUE, FALSE)
+```
+
+### Fatores
+```{r}
+factor_example <- factor(c("Thiago", "Vidotto"), levels= c("Vidotto", "Thiago"))
+factor_example
+```
+
