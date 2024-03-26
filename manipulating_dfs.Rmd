@@ -1,0 +1,109 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+### Aula Final R Básico
+```{r}
+# pegando o working directory
+getwd()
+
+read.table("/home/beatriz/Documentos/R_training/Sheet_STATLAB.txt")
+```
+
+
+```{r}
+# se eu nao passar o header para o read.table, ele faz essa nova linha
+# com Vs. Posso evitar isso fazendo:
+df <- read.table("Sheet_STATLAB.txt", header=TRUE, sep=" ")
+df
+```
+```{r}
+# investigando a dimensão do meu df
+dim(df)
+# ele tem 90 linhas e 11 colunas
+```
+
+```{r}
+# names te dá os nomes das colunas
+names(df)
+```
+ 
+```{r}
+colnames(df)
+```
+ 
+```{r}
+# classe do objeto:
+class(df)
+```
+ 
+ ### Selecionando parte do df
+```{r}
+df[1:5, 1:5]
+```
+ 
+```{r}
+# selecionando todas as linhas e até as décima coluna
+df[, 1:10]
+```
+```{r}
+# selecionando as 5 primeiras linhas e todas colunas:
+df[, 1:5]
+```
+```{r}
+# 6 primeiras linhas
+head(df)
+# 6 ultimas linhas
+tail(df)
+```
+```{r}
+df[c(1, 8:10), c(1,3,5)]
+```
+
+### Inspecting columns
+```{r}
+class(df$Tobacco)
+```
+
+```{r}
+# transformation into factor
+
+df$Tobacco<-factor(df$Tobacco)
+df$Tobacco
+```
+ ### Make subsets of your df
+```{r}
+# getting subset of df when Tobacco column is yes
+tobacco_yes <- subset(df, Tobacco %in% c("Yes"))
+tobacco_yes
+```
+ 
+```{r}
+tall_yes <- subset(df, Height > 1.8)
+tall_yes
+```
+ 
+ ### Multiple if conditions to subset
+```{r}
+tall_yes_tobacco_yes <- subset(df, Height >1.8 & Tobacco %in% c("Yes"))
+tall_yes_tobacco_yes
+```
+ 
+### Creating tables from columns
+```{r}
+table(df$Race, df$Sex)
+```
+
+### Transposing
+```{r}
+# quando fazemos a transposição, o R transforma o df em matrix
+df_t <- t(df)
+class(df_t)
+```
+### Converting to dataframe
+```{r}
+df_t <- data.frame(t(df))
+df_t
+```
+
