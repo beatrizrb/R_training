@@ -2,8 +2,11 @@
 title: "Coffee data"
 output: html_notebook
 ---
-#![coffee](/home/beatriz/R_training/docs/coffee_project/istockphoto-1177900338-612x612.jpg)
-# Like we Brazilians like to say: anytime is a good time for coffee (even at night)<br>
+<figure>
+  <img src="/home/beatriz/R_training/docs/coffee_project/istockphoto-1177900338-612x612.jpg" alt="Coffee" class="center"> 
+  <figcaption>Like we Brazilians like to say: anytime is a good time for coffee (even at night)</figcaption>
+</figure>
+
 Yes, Brazilians are obsessed over coffee. But we are alone in this, so is the whole world.<br>
 Did you know that besides from water, coffee is the most consumed drink in the world?<br>
 Well, let's start our data exploring.
