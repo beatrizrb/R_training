@@ -2,7 +2,7 @@
 title: "Coffee data"
 output: html_notebook
 ---
-<figure>
+<figure style="text-align:center;">
   <img src="/home/beatriz/R_training/docs/coffee_project/istockphoto-1177900338-612x612.jpg" alt="Coffee" class="center"> 
   <figcaption>Like we Brazilians like to say: anytime is a good time for coffee (even at night)</figcaption>
 </figure>
