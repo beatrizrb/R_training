@@ -1,0 +1,113 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+#![coffee](/home/beatriz/R_training/docs/coffee_project/istockphoto-1177900338-612x612.jpg)
+# Like we Brazilians like to say: anytime is a good time for coffee (even at night)
+Yes, Brazilians are obsessed over coffee. But we are alone in this, so is the whole world.
+Did you know that besides from water, coffee is the most consumed drink in the world?
+Well, let's start our data exploring.
+```{r}
+library(dplyr)
+library(ggplot2)
+```
+# Scenario
+First let's imagine you are about to open your new coffeshop, LateCoffes. Congratulations! You definitely are very busy as opening a store is never an easy task. Right now, you a huge decision to make that choosing which coffees you are going to sell in your shop. Let's say you decide to start with 3 brands. But how are you going to make the decision from which coffee seller to buy?
+
+I believe we could start by analyzing:
+- countries of origin of the coffee;
+- total cup points of the coffee.
+
+Then my first question is:
+- from which country should I buy coffee?
+
+Alright, now that we have decided our criteria, let's import some data, shall we?
+
+## Importing our data
+```{r}
+library(tidytuesdayR)
+data <- tidytuesdayR::tt_load(2020, week = 28)
+coffee_data <- data$coffee_ratings
+head(coffee_data)
+```
+This dataset is huge! How many variables do we have here?
+```{r}
+dim(coffee_data)
+```
+Wow! So we have 43 variables and 1339 entries. We surely can have some fun exploring this dataset. But let's select some interesting variables.
+What are the variables names?
+
+```{r}
+names(coffee_data)
+```
+
+### Selecting countries that have at least 10 occurrences in our df
+```{r}
+filtered_df <- coffee_data %>%
+  group_by(country_of_origin) %>%
+  filter(n()>=20)
+
+filtered_df
+
+```
+We have several producers from different countries with their total cup points data. How can we make a decision which country has the better coffee overall? 
+
+My priority as a coffee shop owner is to have a good and a quality uniform coffee, in the way that my customers are going to have the same good regular experience when drinking my coffee. That is way I will filter my data to select the 15th countries with the lowest standard deviation on total cup points, as their data will be more homogeneous.
+```{r}
+grouped_df <- aggregate(total_cup_points ~ country_of_origin, filtered_df, sd)
+# ordenando e pegando os menores sd
+sorted_grouped_df <- grouped_df[order(grouped_df$total_cup_points),]
+top15 <- head(sorted_grouped_df, 10)
+# fazendo um vetor com os nomes da coluna de country_of_origin
+top15_names <- top15$country_of_origin
+filteredf2 <- filtered_df %>% filter(country_of_origin %in% top15_names)
+filteredf2
+```
+### Let's take a look at the distribution of these countries
+
+```{r}
+p <- ggplot(filteredf2, aes(x=country_of_origin, y=total_cup_points, fill=country_of_origin)) + geom_boxplot() + stat_summary(fun.y=mean, geom="point", shape=20, size=3, color="green", fill="green") + theme(axis.text.x = element_blank() )
+  
+p
+```
+Top3 countries with lowests sd: Brazil, China and Colombia
+
+
+
+
+
+
+
+Actually I want to select the top15 countries with thwe lowest standard deviation as I want a more homogenous dataset.
+
+
+```{r}
+median_agg <- aggregate(total_cup_points ~ country_of_origin, filtered_df1, median)
+head(median_agg[order(median_agg$total_cup_points),], 15)$country_of_origin
+```
+
+```{r}
+p <- ggplot(filteredf2, aes(x=country_of_origin, y=total_cup_points, fill=country_of_origin)) + geom_violin() + 
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+
+p
+```
+```{r}
+p <- ggplot(filteredf2, aes(x=country_of_origin, y=total_cup_points, fill=country_of_origin)) + geom_boxplot() +
+    stat_summary(fun.y=mean, geom="point", shape=20, size=3, color="red", fill="red")
+    
+p
+```
+
+
+
+
+But let's begin by putting our descriptive statistical skills in practice first.
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
