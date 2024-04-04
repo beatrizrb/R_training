@@ -1,9 +1,9 @@
 ---
-title: "R Notebook"
+title: "Coffee data"
 output: html_notebook
 ---
 #![coffee](/home/beatriz/R_training/docs/coffee_project/istockphoto-1177900338-612x612.jpg)
-# Like we Brazilians like to say: anytime is a good time for coffee (even at night)
+#Like we Brazilians like to say: anytime is a good time for coffee (even at night)
 Yes, Brazilians are obsessed over coffee. But we are alone in this, so is the whole world.
 Did you know that besides from water, coffee is the most consumed drink in the world?
 Well, let's start our data exploring.
@@ -11,19 +11,19 @@ Well, let's start our data exploring.
 library(dplyr)
 library(ggplot2)
 ```
-# Scenario
+#Scenario
 First let's imagine you are about to open your new coffeshop, LateCoffes. Congratulations! You definitely are very busy as opening a store is never an easy task. Right now, you a huge decision to make that choosing which coffees you are going to sell in your shop. Let's say you decide to start with 3 brands. But how are you going to make the decision from which coffee seller to buy?
 
 I believe we could start by analyzing:
-- countries of origin of the coffee;
-- total cup points of the coffee.
+-countries of origin of the coffee;
+-total cup points of the coffee.
 
 Then my first question is:
-- from which country should I buy coffee?
+-from which country should I buy coffee?
 
 Alright, now that we have decided our criteria, let's import some data, shall we?
 
-## Importing our data
+##Importing our data
 ```{r}
 library(tidytuesdayR)
 data <- tidytuesdayR::tt_load(2020, week = 28)
@@ -63,7 +63,7 @@ top15_names <- top15$country_of_origin
 filteredf2 <- filtered_df %>% filter(country_of_origin %in% top15_names)
 filteredf2
 ```
-### Let's take a look at the distribution of these countries
+###Let's take a look at the distribution of these countries
 
 ```{r}
 p <- ggplot(filteredf2, aes(x=country_of_origin, y=total_cup_points, fill=country_of_origin)) + geom_boxplot() + stat_summary(fun.y=mean, geom="point", shape=20, size=3, color="green", fill="green") + theme(axis.text.x = element_blank() )
