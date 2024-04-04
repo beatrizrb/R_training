@@ -6,7 +6,7 @@ output: html_notebook
   <img src="/home/beatriz/R_training/docs/coffee_project/istockphoto-1177900338-612x612.jpg" alt="Coffee" class="center"> 
   <figcaption>Like we Brazilians like to say: anytime is a good time for coffee (even at night)</figcaption>
 </figure>
-
+<br>
 Yes, Brazilians are obsessed over coffee. But we are alone in this, so is the whole world.<br>
 Did you know that besides from water, coffee is the most consumed drink in the world?<br>
 Well, let's start our data exploring.
@@ -48,7 +48,7 @@ What are the variables names?
 names(coffee_data)
 ```
 
-### Selecting countries that have at least 10 occurrences in our df
+### Selecting countries that have at least 20 occurrences in our df
 ```{r}
 filtered_df <- coffee_data %>%
   group_by(country_of_origin) %>%
