@@ -7,8 +7,7 @@ output: html_notebook
   <figcaption>Like we Brazilians like to say: anytime is a good time for coffee (even at night)</figcaption>
 </figure>
 <br>
-Yes, Brazilians are obsessed over coffee. But we are alone in this, so is the whole world.<br>
-Did you know that besides from water, coffee is the most consumed drink in the world?<br>
+Yes, Brazilians are obsessed over coffee. But we are not alone in this, so is the whole world.<br>
 Well, let's start our data exploring.
 ```{r}
 library(dplyr)
